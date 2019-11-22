@@ -264,11 +264,144 @@ System.out.println("Result : "+10+20);//1020
 System.out.println("Result : "+(10+20));//30
 ```
 #### Widening
-* It is the process of converting state of narrower type into wider type.
+* It is the process of converting state of instance of narrower type into wider type.
 ```java
 int num1 = 10;
 //double num2 = ( double )num1; //Widening
 double num2 = num1; //Widening
 ```
 * In case of widening, explicit typecasting is optional.
+#### Narrowing
+* It is the process of converting state of instance of wider type into narrower type.
+```java
+double num1 = 10.5;
+int num2 = ( int )num1; //Narrowing
+//int num2 = num1; //Narrowing : Error
+```
+* In case of narrowing explicit type casting is mandatory.
+* If we want to convert String into numeric type then we should use parseXXX() method of Wrapper class
+```java
+  int num1 = Integer.parseInt("10");
+  float num2 = Float.parseFloat("10.1f");
+  double num3 = Double.parseDouble("20.2d");
+```
+### Console IO
+* Console is a class declared in java.io package.
+```java
+ Console console = System.console();
+System.out.print("Name  :   ");
+String name = console.readLine();
+System.out.print("Empid  :   ");
+int empid = Integer.parseInt(console.readLine());
+System.out.print("Salary  :   ");
+float salary = Float.parseFloat( console.readLine());
+```
+
+### Entry Point Method
+* "main" is entry point method in java.
+* Syntax
+```java
+public static void main( String[] args )
+{   }
+```
+* Invoking main method is a job of JVM.
+* We can define main method per class but only one main method can be considered as entry point method.
+* We can overload main method in java.
+### Access Modifier
+1. private
+2. package level private( or default )
+3. protected
+4. public
+### Path and Classpath
+* Path is environment variable of OS platform which is used to locate java language tools.
+* Syntax to set PATH:
+    export PATH=/usr/bin/
+* Check status of PATH
+    echo $PATH
+* Classpath is environment variable of Java Platform which is used to locate .class file / .jar file.
+* Syntax to set CLASSPATH:    
+    export CLASSPATH=./bin/
+* Check status of CLASSPATH
+    echo $CLASSPATH
+### Comments
+* If we want to maintain documentation of source code then we should use comments.
+* Types of Comments:
+1. //Single line comment
+2. /* 
+        Multiline comment
+   */
+3. /**
+        Java Documentation comment.
+    */
+* If we want to process java documentation comment then we should use javadoc tool.
+
+### Class
+* Class is collection of fields and methods.
+* Since Structre and behavior of instance depends on class, it is considered as template, model or blueprint for instance.
+* Class represents group of instances which is having common structure and common behavior.
+* By defining class we can achieve encapsulation.
+* In java, class members are by default considered as package level private.
+
+### Instance
+* In java, object is also called instance.
+* An entity, which is having physical existance is called instance.
+* An entity, which is having state, behavior and identity is called instance.
+* Process of creating instance from class is called instantiation.
+* By creating instance we can achive abstraction.
+
+### Fields
+* In java, data member is called field.
+* Class can contain static as well as non static field.
+* Non static field is called instance variable. Instance variables are designed to access using instance.
+```java
+class Test
+{
+    int number; //Instance variable
+}
+class Program
+{
+    public static void main(String[] args) 
+    {
+        Test t = new Test( );
+        t.number = 10;
+        System.out.println(t.number);
+    }
+}
+```
+* Instance variable get space once per instance.
+* Static data member is called class level variable. Class level variable is designed to access using class name.
+```java
+class Test
+{
+    static int number; //Class level variable
+}
+class Program
+{
+    public static void main(String[] args) 
+    {
+        Test.number = 10;
+        System.out.println(Test.number);
+    }
+}
+```
+* Class level variable get space once per class.
+* Class is non primitive type hence to create its instance it is mandatory to use new operator.
+* If we want to perform operations on instance then it is mandatory to create reference / object reference of it.
+```C++
+Complex *ptr = new Complex(); //C++
+//ptr is pointer
+```
+```java
+Complex c1 = new Complex(); //Java
+//c1 is reference
+```
+```java
+Compex c1 = new Complex();
+Complex c2 = c1;
+Compex c3 = new Complex();
+```
+* Process of calling method on instance is called message passing
+* this is implicit reference variable that is available in every non static method of the class which is used to store reference of current instance.
+
+
 
