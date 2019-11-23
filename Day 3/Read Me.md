@@ -151,3 +151,188 @@ Integer n1 = new Integer("125");
 int n2 = n1; //Auto UnBoxing
 //int n2 = n1.intValue(); //UnBoxing
 ```
+### Static Concept
+* In java, we not declare local variable static.
+* Static variable is also called as class-level variable. Since class level variable must exist in class scope, local variable can not be declared as static.
+```java
+public static void print( )
+{
+    static int count = 0; //Not OK
+    ++ count;
+    System.out.println("Count   :   "+count);
+}
+```
+* We can not declare local variable static but we can declare field static.
+```java
+class Test
+{
+    private static int count;
+    public static void print( )
+    {
+        ++ count;
+        System.out.println("Count   :   "+count);
+    }
+}
+class Program
+{
+    public static void main(String[] args) 
+    {
+        Test.print();   //1
+        Test.print();   //2
+        Test.print();   //3
+    }
+}
+```
+* If we want to share value of any field in all the instances of same class then we should declare that field static.
+* Static field i.e class level variable get space once during class loading on Method area once per class. 
+* If we want to intialize static field then we should use static initializer block.
+* JVM execute static initializer block during class loading.
+* we can write multiple static initializer block inside class. In this case JVM execute it sequentially.
+```java
+class Test
+{
+    private static int number;
+    static //Static Initializer block
+    {
+        Test.number = 500;
+    }
+}
+```
+* If we want to access non static members of the class then we should define non static method inside class.
+* Non static methods are designed to callon instance.
+* If we want to access static members of the class then we should define static method inside class.
+* Static methods are designed to call on class name.
+* Since static methods are designed to call on class name, it doesn't get this reference.
+* Since static method do not get this reference, we can not access non static members inside static method. In other words, static method can access only static members of the class.
+* Using instance, we can access non static members inside static method.
+```java
+class Program
+{
+    private int num1 = 10; //Instance variable
+    private static int num2 = 20; //Class level variable
+    public static void main(String[] args) 
+    {
+        //System.out.println("Num1    :   "+num1);//Error
+        Program p = new Program();
+        System.out.println("Num1    :   "+p.num1);//10
+        System.out.println("Num2    :   "+num2);//20
+    }
+}
+```
+```java
+class A
+{
+    public static void f1( ){   }
+}
+class Program
+{
+    public static void f2( ){   }
+    public static void main(String[] args) 
+    {
+        //f1( );  //Not OK
+        A. f1( );  //OK
+        f2( );  //OK
+        Program.f2( );  //OK
+    }
+}
+```
+* Program for instance counter
+```java
+class InstanceCounter
+{
+    private static int count;
+    public InstanceCounter( )
+    {
+        ++ InstanceCounter.count;
+    }
+    public static int getCount() 
+    {
+        return InstanceCounter.count;
+    }
+}
+```
+* A class from which we can create only instance is called singleton class.
+```java
+class Singleton
+{
+    private Singleton( )
+    {   }
+    private static Singleton instance;
+    public static Singleton getInstance( )
+    {
+        if( Singleton.instance == null )
+            Singleton.instance = new Singleton();
+        return Singleton.instance;
+    }
+}
+```
+* Second implementation
+```java
+class Singleton
+{
+    private static Singleton instance;
+    static
+    {
+        Singleton.instance = new Singleton();
+    }
+    private Singleton( )
+    {   }
+    public static Singleton getInstance( )
+    {
+        return Singleton.instance;
+    }
+}
+```
+### Final Variable
+* final is keyword in java.
+* if we dont want to modify state of the variable then we should declare it final.
+```java
+public static void main(String[] args) 
+{
+    final int number = 10;
+    //++ number;  //Not OK
+    System.out.println("Number  :   "+number);
+}
+```
+* We can not declare local variable static but we can declare it final.
+```java
+public static void main(String[] args) 
+{
+    //final int number = 10;  //Ok
+    final int number;  //Ok
+    number = 10;//OK
+    //number = 20;//Not OK
+    System.out.println("Number  :   "+number);
+}
+```
+* After storing value, if we dont want to modify state then we should use final keyword.
+```java
+ public static void main(String[] args) 
+{
+    
+    Console console = System.console();
+    System.out.println("Enter number    :   ");
+    final int number = Integer.parseInt(console.readLine());  //Ok
+    System.out.println("Number  :   "+number);
+}
+```
+* We can provide value to the final variable at compile time as well as runtime.
+* If we dont want to modify state of any field inside any method of the class then we should declare field final.
+* Note : If we want to declare any field final then we should declare it static also.
+```java
+class Math
+{
+    public static final double PI = 3.14;   
+}
+```
+* In java, we can not declare instance final but we can declare reference final.
+```java
+public static void main(String[] args) 
+{
+    final Complex c1 = new Complex(10, 20);
+    c1.setReal(100);
+    c1.setImag(200);
+    c1.printRecord();//100,200
+    //c1 = new Complex( 50, 60 ); //Not OK
+}
+```
