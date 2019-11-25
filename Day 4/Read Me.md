@@ -264,3 +264,66 @@ arr[ 0 ] = new int[ 4 ];
 arr[ 1 ] = new int[ 2 ];
 arr[ 2 ] = new int[ 3 ];
 ```
+```C++
+class LinkedListNode
+{
+private:
+    int data;
+    LinkedListNode *next;
+public:
+    LinkedListNode( int data )
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+    friend class LinkedList;
+};
+class LinkedList
+{
+private:
+    LinkedListNode *head;
+public:
+    LinkedList( )
+    {
+        this->head = NULL;
+    }
+};
+```
+```java
+class LinkedListNode
+{
+    int data;
+    LinkedListNode next;
+    public LinkedListNode( int data )
+    {
+        this.data = data;
+    }
+};
+class LinkedList
+{
+    private LinkedListNode head;
+    public void addFirst( int data )
+    {   }
+    public void addLast( int data )
+    {   }
+    public void removeFirst( )
+    {   }
+    public void removeLast( )
+    {   }
+    public void printList( )
+    {   }
+}
+class Program
+{
+    public static void main(String[] args) 
+    {
+        LinkedList list = new LinkedList();
+        list.addFirst( 10 );
+        list.addLast( 20 );    
+        list.addLast( 30 );
+        list.addLast( 40 );
+        list.addLast( 50 );
+        list.printList( );
+    }
+}
+```
