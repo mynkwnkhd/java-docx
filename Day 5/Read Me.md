@@ -284,3 +284,112 @@ Throwable th2 = new Throwable( "Ex Message", cause );
     2. IOException
     3. SQLException
     4. CloneNotSupportedException
+* While performing, arithmetic operation, if any exceptional situation occurs then JVM throws ArithmeticException. For example, an integer "divide by zero".
+* If we want to inspect group of statements for exception then we should use try block/handler.
+* We can write try block after catch/ finally block.
+* Try block must have at least one catch/finally block or resource.
+* If we want to handle exception then we should use catch block/handler.
+* Catch block can handle exception thrown from try block.
+* We can not define catch block before try and after finally block.
+* Single try block may have multiple catch block.
+* In java, in single catch block, we can handle multiple specific exceptions. Such catch block is called multi catch block.
+```java
+try
+{   }
+catch (ArithmeticException | InputMismatchException ex)
+{
+    ex.printStackTrace();
+}
+```
+* NullPointerException is unchecked exception
+```java
+NullPointerException ex = new NullPointerException();//OK
+RuntimeException ex = new NullPointerException();//OK
+Exception ex = new NullPointerException();//OK
+```
+* InterruptedException is checked exception
+```java 
+InterruptedException ex = new InterruptedException();//OK
+Exception ex = new InterruptedException();//OK
+```
+* Exception class reference variable can contain reference of any checked as well as uncheked exception. Hence to write generic catch block we should use java.lang.Exception class.
+```java
+try
+{   }
+catch(Exception ex )
+{
+    ex.printStackTrace();
+}
+```
+* If child/parent relation is exist between exception type then we must handle child type exception first.
+* If we want to generate new exception then we should use throw keyword.
+* throw statement is a jump statement.
+* finally is a block, which is used to release local resources.
+* We can not write finally block before try block and catch block.
+* For single try block we can write only one  finally block.
+* JVM always execute finally block.
+#### try with resource
+* resource type must impletement AutoCloseable /Closeable interface.
+```java
+try( Scanner sc = new Scanner(System.in);)
+{   }
+catch (Exception ex )
+{
+    ex.printStackTrace();
+}
+```
+* throws is a keyword.
+* If we want to delegate exception from one method to another then we should use throws clause.
+```java
+public static void print( ) throws InterruptedException
+{
+    for( int count = 1; count <= 10; ++ count  )
+    {
+        System.out.println("Count	:	"+count);
+        Thread.sleep(500 );
+    }	
+}
+```
+* A, B, C : Checked Exceptions
+```java
+//public static void print( int number )throws A, B, C
+public static void print( int number )throws Exception
+{
+    if( number <  0 )
+        throw new A();
+    else if( number >= 0 && number < 10 )
+        throw new B();
+    else if( number >= 10 && number < 20 )
+        throw new C();
+    else
+        System.out.println( number );
+}
+```
+#### Exception Chaining
+* Process of handling exception by throwing new type of exception is called exception chaining.
+```java
+class A
+{
+	public void print( )
+	{	}
+}
+class B extends A
+{
+	@Override
+	public void print() throws RuntimeException
+	{
+		try
+		{
+			for( int count = 1; count <= 10; ++ count )
+			{
+				System.out.println("Count	:	"+count);
+				Thread.sleep(100);
+			}
+		}
+		catch (InterruptedException cause) 
+		{
+			throw new RuntimeException( cause );  //Exception chaining
+		}
+	}
+}
+```
