@@ -358,6 +358,195 @@ while( stk.hasMoreTokens() )
     System.out.println(token);
 }
 ```
+#### StringBuffer and StringBuilder
+* Both are final classes declared in java.lang package.
+* Both are used to create mutable string object/instance
+* If we want to create instance StringBuffer and StringBuilder then it is mandatory to use new operator.
+* equals() and hashCode() method is not overriden in these classes.
+```java
+StringBuffer sb1 = new StringBuffer("DAC");
+StringBuffer sb2 = new StringBuffer("DAC");
+if( sb1 == sb2 )
+    System.out.println("Equal");
+else
+    System.out.println("Not Equal");
+//Output : Not Equal
+```
+```java
+StringBuffer sb1 = new StringBuffer("DAC");
+StringBuffer sb2 = new StringBuffer("DAC");
+if( sb1.equals(sb2) )
+    System.out.println("Equal");
+else
+    System.out.println("Not Equal");
+//Output : Not Equal
+```
+```java
+StringBuilder sb1 = new StringBuilder("KDAC");
+StringBuilder sb2 = new StringBuilder("KDAC");
+if( sb1 == sb2 )
+    System.out.println("Equal");
+else
+    System.out.println("Not Equal");
+//Output : Not Equal
+```
+```java
+StringBuilder sb1 = new StringBuilder("KDAC");
+StringBuilder sb2 = new StringBuilder("KDAC");
+if( sb1.equals(sb2) )
+    System.out.println("Equal");
+else
+    System.out.println("Not Equal");
+//Output : Not Equal
+```
+* Methods of StringBuffer and StringBuilder
+1. public StringBuffer append(String str)
+2. public char charAt(int index)
+3. public StringBuffer delete(int start, int end)
+4. public int length()
+5. public StringBuffer reverse()
+6. public String substring(int start)
 
+#### Pattern and Matcher
+* If we want to validate String then we should use regular expression.
+* If we want to use regular expression to validate String then we should use Pattern and Matcher class.
+* these classes are declared in java.util.regex package.
+```java
+EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
+PHONE_PATTERN = "\\d{10}";
 
+NAME_PATTEREN = "[a-zA-Z][a-zA-Z ]*";
+```
+### Nested class
+* If we define class inside scope of another class then it is called nested class.
+```java
+//Top Level class
+class Outer //Outer.class
+{
+    //Nested class
+    class Inner //Outer$Inner.class
+    {   }
+}
+```
+* Access modifier of top level can be either package level private or public only . We can use any access modifier on nested class.
+* Using nested class we can achieve encapsulation.
+* There are 2 types of nested class:
+    1. Inner class
+    2. Static nested class.
+#### Inner Class
+* Non static nested class is also called as inner class.
+* If implementation of nested class is depends on implementation of top level class then we should declare nested class non static i.e nested class should be inner class.
+* Note : For simplicity, consider non static nested class as non static method of a class.
+```java
+class Outer 
+{
+    class Inner
+    {   }
+}
+```
+* Instantiation of Top level class
+```java
+Outer out = new Outer();
+```
+* Instantiation of Inner class( Method - I)
+```java
+Outer out = new Outer();
+Outer.Inner in = out.new Inner();
+```
+* Instantiation of Inner class( Method - II)
+```java
+Outer.Inner in = new Outer().new Inner();
+```
+* Using instance, we can access members of inner class inside method of top level class.
+* Without instance, we can access members of top level class inside method of non static nested class / inner class.
+```java
+class Outer
+{
+	private int num1 = 10;
+	class Inner
+	{
+		private int num1 = 20;
+		public void print( )
+		{
+			int num1 = 30;
+			System.out.println("Num1	:	"+Outer.this.num1);		//10
+			System.out.println("Num1	:	"+this.num1);	//20
+			System.out.println("Num1	:	"+num1);	//30
+		}
+	}
+}
+public class Program 
+{
+	public static void main(String[] args) 
+	{
+		Outer.Inner in = new Outer().new Inner();
+		in.print();
+	}
+}
+```
+#### Static nested class
+* If we declare nested class static then it is called static nested class.
+* We can not declare top level class static but we can declare nested class static.
+* If implementation of nested class do not depends on top level class then we should declare nested class static.
+* Note : For simplicity, consider static nested class as static method of a class.
+```java
+class Outer 
+{
+    static class Inner
+    {   }
+}
+```
+* Instantiation of Top level class
+```java
+Outer out = new Outer();
+```
+* Instantiation of static nested class
+```java
+Outer.Inner in = new Outer.Inner();
+```
+* Using instance, we can access members of static nested class inside method of top level class.
+* We can access static members of top level class inside method of static nested class directly. But If we want to access non static members of top level class inside method of static nested class then we must use instance of top level class.
+### Local Class
+* If we define class Inside method then it is called local class.
+* In java local class is also called as method local inner class.
+* We can not create reference / instance of local class outside method.
+* Types of local class
+    1. Method local inner class.
+    2. Method local anonymous inner class.
+#### Method local inner class.
+```java
+public class Program //Program.class
+{
+	public static void main(String[] args) 
+	{
+		class Complex	//Program$1Complex.class
+		{
+			private int real = 10;
+			private int imag = 20;
+			@Override
+			public String toString()
+			{
+				return "Complex [real=" + real + ", imag=" + imag + "]";
+			}
+		}
+		Complex c1 = new Complex();
+		System.out.println(c1.toString());
+	}
+}
+```
+#### Method local anonymous inner class.
+* In java, we can define class without name. Such class anonymous class. 
+* We can create anonymous class inside method only hence it is also called method local anonymous inner class.
+```java
+Object obj = new Object() //Program$1.class
+            {
+                String message = "Hello";
+                @Override
+                public String toString() 
+                {
+                    return message;
+                }
+            };
+System.out.println(obj.toString());
+```
