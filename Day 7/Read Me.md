@@ -388,3 +388,135 @@ Date dt2 = dt1; //Shallow Copy of reference.
     3. java.util.RandomAccess
     4. java.io.Serializable
     5. java.rmi.Remote
+### Functional Programming
+#### Default Method
+* At runtime, if we want to modify interface then we should use default method.
+* It is optional to override default method in sub class but it must contain body.
+* We can call interafce default method in sub class. Syntax is :
+    "InterfaceName.super.defaultMethodName();"
+#### Static Interface Method
+* It is a helper method that we can use in default method as well as sub class.
+* We can not override static interface method.
+#### Functional Interface
+* If interface contains only one abstract method then it is called functional interface. 
+* Since functional interface Contains Single Abstract Method, it is also called as SAM interface.
+* Functional interface can contain multiple default methods and static methods but it must contain one abstract method.
+* FunctionalInterface is annotation declared in java.lang package.
+* @FunctionalInterface annotation help to decide wheather interface is functional or not.
+```java
+@FunctionalInterface
+interface A
+{
+	void f1();  //Method Descriptor
+}
+```
+* Abstract method declared in functional interface is called method descriptor.
+* java.util.function package contains all Oracle supplied functional interfaces.
+* Following are some of the functional interfaces declared in java.util.function package.
+1. Predicate<T>
+    - boolean test(T t)
+2. Supplier<T>
+    - T get()
+3. Consumer<T>
+    - void accept(T t)
+4. Function<T,R>
+    - R apply(T t)
+5. UnaryOperator<T>
+    - It is sub interface of Function<T,R> interface
+* If we want to implement functional interface then we should use lambda expression and method reference.
+#### Lambda Expression
+* If expression contains lambda operator then such expression called lambda expression
+* operator "->" is called lambda operator. 
+* Syntax:
+    ( Input Parameters ) -> Lambda Body;
+* Lambda body can contain one or multiple statements. If lambda body contains multiple statements then it is mandatory to provide curly braces.
+* Lambda expression is also called as anonymous method.
+* If we want to define labda expression then we should take help of method descriptor.
+* Example 1
+```java
+@FunctionalInterface
+interface Printable
+{
+	void print( );	//Method Descriptor
+}
+```
+```java
+Printable p = ( )-> System.out.println("Hello Lambda");
+p.print();
+```
+* Example 2
+```java
+@FunctionalInterface
+interface Math
+{
+	int sum( int num1, int num2 );
+}
+```
+```java
+//Math m = ( int num1, int num2 )-> num1 + num2; //or
+//Math m = ( int x, int y )-> x + y; //or
+Math m = (  num1,  num2 )-> num1 + num2;
+int result = m.sum(10, 20);
+System.out.println("Result	:	"+result);
+```
+* Example 3
+```java
+@FunctionalInterface
+interface Math
+{
+	int square( int number );
+}
+```
+```java
+//Math m = ( int number )-> number * number;
+//Math m = (  number )-> number * number;
+Math m = number -> number * number;
+int result = m.square(5);
+System.out.println("Result	:	"+result);
+```
+* Example 4:
+```java
+@FunctionalInterface
+interface Math
+{
+	int factorial( int number );
+}
+```
+```java
+Math m =  number -> {
+int result = 1;
+for( int count = 1; count <= number; ++ count )
+    result = result * count;
+return result;
+};
+
+int result = m.factorial(5);
+System.out.println("Result	:	"+result);
+```
+#### Method Reference
+```java
+@FunctionalInterface
+interface Printable
+{
+	void print( );
+}
+```
+```java
+public static void showRecord( )
+{
+    System.out.println("Inside showRecord");
+}
+public void displayRecord( )
+{
+    System.out.println("Inside displayRecord");
+}
+public static void main(String[] args) 
+{
+    //Printable p = ( )->System.out.println("hello");
+    //Printable p = Program::showRecord;
+    
+    Program program = new Program();
+    Printable p = program::displayRecord;
+    p.print();
+}
+```
