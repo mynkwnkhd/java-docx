@@ -302,6 +302,59 @@ public class Program
 	}
 }
 ``` 
+### Hashtable
+* It is sub class of Dictionary class which implements Map<K,V> interface.
+* It can not contain duplicate keys but it can contain duplicate values.
+* It can not contain null key and null value.
+* It is synchronized collection.
+* It is a member of the Java Collections Framework.
+* It is introduced in jdk1.0
+* Instantiation:
+```java
+Map<Integer, String> map = new Hashtable( );
+``` 
+* If we want to use instance non final type as a key then it should override equals() and hashCode() method.
+
+### HashMap<K,V>
+* It is a Map<K,V> collection.
+* It's implementation is based on Hashtable.
+* It can not contain duplicate keys but it can contain duplicate values.
+* It can contain null key and null value.
+* It is unsynchronized collection. Using synchronizedMap() method we can make it synchronized.
+```java
+   Map m = Collections.synchronizedMap(new HashMap(...));
+```
+* This class is a member of the Java Collections Framework.
+* It is introduced in jdk 1.2
+* Note : If we want to use instance non final type as a key then it should override equals() and hashCode() method.
+
+### LinkedHashMap<K,V>
+* It is sub class of HashMap<K,V> class.
+* Its implementation is based on LinkedList and Hashtable.
+* It is ordered collection.
+* It is unsuchronized collection. Using synchronizedMap() method we can make it synchronized.
+```java
+   Map m = Collections.synchronizedMap(new LinkedHashMap(...));
+```
+* This class is a member of the Java Collections Framework.
+* It is introduced in jdk 1.4
+* Note : If we want to use instance non final type as a key then it should override equals() and hashCode() method.
+### TreeMap<K,V>
+* It is Map<K,V> collection whose implementation is based on Red Black Tree.
+* It can not contain duplicate keys but it can contain duplicate values.
+* It can not contain null key but it can contain null value.
+* It is unsynchronized collection. Using synchronizedSortedMap() method we can make it synchronized.
+```java
+SortedMap m = Collections.synchronizedSortedMap(new TreeMap(...));
+```
+* It maintains entries sorted according to the key.
+* Note : If we want to use instance of non final type as a key then non final type should implement Comparable interface.
+* This class is a member of the Java Collections Framework.
+* It is introduced in jdk1.2
+* Instantiation
+```java
+Map<Integer,String> map = new TreeMap<>( );
+```
 
 
 
