@@ -243,3 +243,42 @@ Since 1.4  --- JDBC 3.0
 Since 1.2  --- JDBC 2.0
 Since 1.1  --- JDBC 1.0
 
+#### Steps to connect Java Application to Database
+Step 0 : Add JDBC connector( .jar ) in buildpath / classpath / runtime classpath.
+Step 1 : Load and register Driver ( Since 1.8 it is optional ).
+Step 2 : Establish connection using users credential.
+Step 3 : Create Statement/PreparedStatement/CallableStatement to execute query.
+Step 4 : Prepare and Execute Query
+Step 5 : Close resources.
+
+### Object Relational Mapping( ORM )
+* If we want to map SQL entities with Java entities then we should use ORM technique.
+SQL             Java
+Table           Class
+Column          Field
+Row             Instance
+Primary Key     Identity Field
+* Using Plain Old Java Object( POJO ) class we can use ORM technique in java application.
+* A class which do not extend any class or do not implement any interface is called pojo class.
+* It is also called as Data Transfer Object( DTO ), Value Object( VO ), Business Object( BO ) or entity.
+
+* Rules of defining POJO class
+1. It must be packaged public class.
+2. It must contain def. constructor.
+3. For every column it should contain private fields.
+4. For every field it should contain getter and setter method
+5. It should not contain business logic method but it can contain toString, equals and hashCode method.
+
+### Data Access Object( DAO )
+* If we want to seperate data manipulation logic from business logic then we should use DAO class.
+* Rules to define DAO class
+1. It must be packaged public class.
+2. It must contain def constructor
+3. It should contain CRUD operations. It can contain B.L methods
+
+### Disadvanatages of Statement
+1. It Compiles sql statement per request hence degrade performance
+2. Can not handle special characters in query.
+3. Can not prevent SQL injection
+4. Can not execute stored procedure and function.
+* To overcome most of the limitations we should use PreparedStatement object.
